@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Result Management System</title>
+</head>
+<body>
+
+<h1>Student Result Management System</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="roll_number" placeholder="Enter Roll Number" required>
+    <button type="submit">Search</button>
+</form>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+{% if student %}
+<h2>Student Details</h2>
+
+<p><strong>Name:</strong> {{ student.name }}</p>
+<p><strong>Roll Number:</strong> {{ student.roll_number }}</p>
+<p><strong>Department:</strong> {{ student.department }}</p>
+<p><strong>Semester:</strong> {{ student.semester }}</p>
+
+<h2>Results</h2>
+
+<table border="1">
+    <tr>
+        <th>Subject</th>
+        <th>Marks</th>
+    </tr>
+
+    {% for result in results %}
+    <tr>
+        <td>{{ result.subject }}</td>
+        <td>{{ result.marks }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+</body>
+</html>
